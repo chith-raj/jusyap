@@ -122,7 +122,7 @@ def debug_keys() -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="VoiceInk: local dictation, Whisper transcription, local rewrite, and paste."
+        description="Yapr: local dictation, Whisper transcription, local rewrite, and paste."
     )
     parser.add_argument(
         "--config",
@@ -161,15 +161,15 @@ def build_parser() -> argparse.ArgumentParser:
 def acquire_single_instance_lock() -> bool:
     global _LOCK_FILE
 
-    state_dir = Path.home() / "Library" / "Application Support" / "VoiceInk"
+    state_dir = Path.home() / "Library" / "Application Support" / "Yapr"
     state_dir.mkdir(parents=True, exist_ok=True)
-    lock_path = state_dir / "voiceink.lock"
+    lock_path = state_dir / "yapr.lock"
     _LOCK_FILE = lock_path.open("w", encoding="utf-8")
 
     try:
         fcntl.flock(_LOCK_FILE, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
-        print("VoiceInk is already running.", flush=True)
+        print("Yapr is already running.", flush=True)
         return False
 
     _LOCK_FILE.write(f"{os.getpid()}\n")

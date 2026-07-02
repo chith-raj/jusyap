@@ -49,7 +49,7 @@ class Recorder:
             pcm = (audio * 32767).astype(np.int16)
 
         temp_file = tempfile.NamedTemporaryFile(
-            prefix="dictation-polisher-", suffix=".wav", delete=False
+            prefix="yapr-", suffix=".wav", delete=False
         )
         temp_path = Path(temp_file.name)
         temp_file.close()

@@ -9,9 +9,9 @@ from typing import Iterable, Tuple
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
-RESOURCES_DIR = PROJECT_DIR / "VoiceInk.app" / "Contents" / "Resources"
-ICONSET_DIR = RESOURCES_DIR / "VoiceInk.iconset"
-ICNS_PATH = RESOURCES_DIR / "VoiceInk.icns"
+RESOURCES_DIR = PROJECT_DIR / "Yapr.app" / "Contents" / "Resources"
+ICONSET_DIR = RESOURCES_DIR / "Yapr.iconset"
+ICNS_PATH = RESOURCES_DIR / "Yapr.icns"
 
 
 Color = Tuple[int, int, int, int]

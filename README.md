@@ -1,6 +1,6 @@
-# VoiceInk
+# Yapr
 
-VoiceInk is a local macOS dictation tool. Press a shortcut, speak naturally, and VoiceInk inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
+Yapr is a local macOS dictation tool for turning your free-form yapping into usable text. Press a shortcut, speak naturally, and Yapr inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
 
 ```text
 Default shortcut: Command + Shift + D
@@ -17,12 +17,12 @@ Default shortcut: Command + Shift + D
 
 ## Quick Start
 
-Follow this path if you are setting up VoiceInk for the first time:
+Follow this path if you are setting up Yapr for the first time:
 
 ```text
 [ ] Clone the repo
 [ ] Run setup
-[ ] Start VoiceInk
+[ ] Start Yapr
 [ ] Approve macOS permissions
 [ ] Press Command + Shift + D inside any text field
 ```
@@ -30,8 +30,8 @@ Follow this path if you are setting up VoiceInk for the first time:
 ### 1. Clone The Repo
 
 ```bash
-git clone https://github.com/chith-raj/voiceink.git
-cd voiceink
+git clone https://github.com/chith-raj/yapr.git
+cd yapr
 ```
 
 ### 2. Run Setup
@@ -44,13 +44,13 @@ chmod +x scripts/setup.sh
 This creates a Python virtual environment, installs dependencies, and creates:
 
 ```text
-~/.dictation-polisher/config.json
+~/.yapr/config.json
 ```
 
-### 3. Start VoiceInk
+### 3. Start Yapr
 
 ```bash
-./voiceink
+./yapr
 ```
 
 You should see:
@@ -65,11 +65,11 @@ Listening for hotkey: <cmd>+<shift>+d
 2. Press `Command + Shift + D`.
 3. Speak.
 4. Press `Command + Shift + D` again.
-5. VoiceInk transcribes and inserts the final text.
+5. Yapr transcribes and inserts the final text.
 
 ## Choose A Mode
 
-VoiceInk starts in lightweight mode by default.
+Yapr starts in lightweight mode by default.
 
 | Mode | Best For | Local Model Load | Command |
 | --- | --- | --- | --- |
@@ -93,7 +93,7 @@ Rewriting: disabled
 
 ### Polish Mode
 
-Use this when you want VoiceInk to clean up grammar and structure.
+Use this when you want Yapr to clean up grammar and structure.
 
 First install Ollama from:
 
@@ -117,7 +117,7 @@ When polishing is enabled, Ollama must be running.
 
 ## Launch Without Terminal
 
-If you do not want to run `./voiceink` manually every time, install the app launcher:
+If you do not want to run `./yapr` manually every time, install the app launcher:
 
 ```bash
 ./scripts/install-app.sh
@@ -126,10 +126,10 @@ If you do not want to run `./voiceink` manually every time, install the app laun
 Then open:
 
 ```text
-~/Applications/VoiceInk.app
+~/Applications/Yapr.app
 ```
 
-You can drag `VoiceInk.app` to the Dock.
+You can drag `Yapr.app` to the Dock.
 
 If macOS blocks the app from reading files in a protected folder like `Documents`, use the installed app from `~/Applications`.
 
@@ -151,12 +151,12 @@ Remove it later:
 Logs are written to:
 
 ```text
-~/Library/Logs/voiceink/
+~/Library/Logs/yapr/
 ```
 
 ## macOS Permissions
 
-VoiceInk needs a few macOS permissions.
+Yapr needs a few macOS permissions.
 
 | Permission | Why |
 | --- | --- |
@@ -178,10 +178,10 @@ Accessibility
 Input Monitoring
 ```
 
-Allow the app you use to launch VoiceInk:
+Allow the app you use to launch Yapr:
 
 - `Terminal`, `iTerm`, `Warp`, or `Visual Studio Code` if running from Terminal.
-- `VoiceInk` if launching `VoiceInk.app`.
+- `Yapr` if launching `Yapr.app`.
 
 After changing permissions, quit and reopen the app or terminal.
 
@@ -190,13 +190,13 @@ After changing permissions, quit and reopen the app or terminal.
 Record once, stop with Enter, and print output instead of pasting:
 
 ```bash
-./voiceink --once --print-only
+./yapr --once --print-only
 ```
 
-Check whether macOS is sending key events to VoiceInk:
+Check whether macOS is sending key events to Yapr:
 
 ```bash
-./voiceink --debug-keys
+./yapr --debug-keys
 ```
 
 Press a few keys. If nothing prints, check `Input Monitoring`.
@@ -206,7 +206,7 @@ Press a few keys. If nothing prints, check `Input Monitoring`.
 Edit:
 
 ```text
-~/.dictation-polisher/config.json
+~/.yapr/config.json
 ```
 
 Common settings:
@@ -254,18 +254,18 @@ Smaller Whisper models are faster. Larger models are more accurate.
 Run:
 
 ```bash
-./voiceink --debug-keys
+./yapr --debug-keys
 ```
 
-If no key events appear, enable `Input Monitoring` for your terminal or `VoiceInk.app`.
+If no key events appear, enable `Input Monitoring` for your terminal or `Yapr.app`.
 
 ### Text Does Not Paste
 
-Enable `Accessibility` permission for your terminal or `VoiceInk.app`.
+Enable `Accessibility` permission for your terminal or `Yapr.app`.
 
 ### App Opens But Nothing Is Visible
 
-VoiceInk is a background app. It does not show a window. Click into a text field and press:
+Yapr is a background app. It does not show a window. Click into a text field and press:
 
 ```text
 Command + Shift + D
@@ -288,7 +288,8 @@ ollama pull llama3.2:1b
 
 ## Notes
 
-- VoiceInk uses clipboard paste because it works across most macOS apps.
+- Yapr uses clipboard paste because it works across most macOS apps.
 - The first transcription can take longer while Whisper downloads and caches the model.
 - The default setup is intentionally lightweight for MacBook Air-class machines.
 - Regenerate the app icon with `./scripts/generate-icon.py` if you edit the icon generator.
+- This project was previously named VoiceInk. It was renamed to Yapr to avoid confusion with another existing app.

@@ -6,17 +6,17 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleDisplayName</key>
-  <string>VoiceInk</string>
+  <string>Yapr</string>
   <key>CFBundleExecutable</key>
-  <string>VoiceInk</string>
+  <string>Yapr</string>
   <key>CFBundleIconFile</key>
-  <string>VoiceInk</string>
+  <string>Yapr</string>
   <key>CFBundleIdentifier</key>
-  <string>local.voiceink</string>
+  <string>local.yapr</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
-  <string>VoiceInk</string>
+  <string>Yapr</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>
@@ -28,6 +28,6 @@
   <key>LSUIElement</key>
   <true/>
   <key>NSMicrophoneUsageDescription</key>
-  <string>VoiceInk records your dictation locally so it can transcribe and insert text.</string>
+  <string>Yapr records your dictation locally so it can transcribe and insert text.</string>
 </dict>
 </plist>

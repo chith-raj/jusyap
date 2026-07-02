@@ -7,4 +7,4 @@ __pycache__/
 .ruff_cache/
 *.wav
 *.pid
-VoiceInk.app/Contents/Resources/VoiceInk.iconset/
+Yapr.app/Contents/Resources/Yapr.iconset/

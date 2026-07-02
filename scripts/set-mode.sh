@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CONFIG_PATH="$HOME/.dictation-polisher/config.json"
+CONFIG_PATH="$HOME/.yapr/config.json"
 MODE="${1:-}"
 
 if [[ "$MODE" != "light" && "$MODE" != "polish" ]]; then
