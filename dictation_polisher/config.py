@@ -36,7 +36,7 @@ DEFAULT_CONFIG: Dict[str, Any] = {
 
 
 def default_config_path() -> Path:
-    return Path.home() / ".yapr" / "config.json"
+    return Path.home() / ".jusyap" / "config.json"
 
 
 def deep_merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]:

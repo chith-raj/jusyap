@@ -2,15 +2,15 @@
 set -euo pipefail
 
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-INSTALLED_RUNTIME="$HOME/Library/Application Support/Yapr/runtime"
-if [[ -f "$INSTALLED_RUNTIME/yapr" ]]; then
+INSTALLED_RUNTIME="$HOME/Library/Application Support/JusYap/runtime"
+if [[ -f "$INSTALLED_RUNTIME/jusyap" ]]; then
   PROJECT_DIR="$INSTALLED_RUNTIME"
 else
   PROJECT_DIR="$(cd "$APP_DIR/.." && pwd)"
 fi
-LOG_DIR="$HOME/Library/Logs/yapr"
-STATE_DIR="$HOME/Library/Application Support/Yapr"
-PID_FILE="$STATE_DIR/yapr.pid"
+LOG_DIR="$HOME/Library/Logs/jusyap"
+STATE_DIR="$HOME/Library/Application Support/JusYap"
+PID_FILE="$STATE_DIR/jusyap.pid"
 
 mkdir -p "$LOG_DIR" "$STATE_DIR"
 
@@ -26,7 +26,7 @@ cd "$PROJECT_DIR"
 
 {
   echo
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting Yapr from app launcher"
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting JusYap from app launcher"
 } >> "$LOG_DIR/out.log"
 
 exec "$PROJECT_DIR/.venv/bin/python" -m dictation_polisher.app >> "$LOG_DIR/out.log" 2>> "$LOG_DIR/err.log"

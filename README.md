@@ -1,6 +1,6 @@
-# Yapr
+# JusYap
 
-Yapr is a local macOS dictation tool for turning your free-form yapping into usable text. Press a shortcut, speak naturally, and Yapr inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
+JusYap is a local macOS dictation tool for turning your free-form yapping into usable text. Press a shortcut, speak naturally, and JusYap inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
 
 ```text
 Default shortcut: Command + Shift + D
@@ -17,12 +17,12 @@ Default shortcut: Command + Shift + D
 
 ## Quick Start
 
-Follow this path if you are setting up Yapr for the first time:
+Follow this path if you are setting up JusYap for the first time:
 
 ```text
 [ ] Clone the repo
 [ ] Run setup
-[ ] Start Yapr
+[ ] Start JusYap
 [ ] Approve macOS permissions
 [ ] Press Command + Shift + D inside any text field
 ```
@@ -30,8 +30,8 @@ Follow this path if you are setting up Yapr for the first time:
 ### 1. Clone The Repo
 
 ```bash
-git clone https://github.com/chith-raj/yapr.git
-cd yapr
+git clone https://github.com/chith-raj/jusyap.git
+cd jusyap
 ```
 
 ### 2. Run Setup
@@ -44,13 +44,13 @@ chmod +x scripts/setup.sh
 This creates a Python virtual environment, installs dependencies, and creates:
 
 ```text
-~/.yapr/config.json
+~/.jusyap/config.json
 ```
 
-### 3. Start Yapr
+### 3. Start JusYap
 
 ```bash
-./yapr
+./jusyap
 ```
 
 You should see:
@@ -65,11 +65,11 @@ Listening for hotkey: <cmd>+<shift>+d
 2. Press `Command + Shift + D`.
 3. Speak.
 4. Press `Command + Shift + D` again.
-5. Yapr transcribes and inserts the final text.
+5. JusYap transcribes and inserts the final text.
 
 ## Choose A Mode
 
-Yapr starts in lightweight mode by default.
+JusYap starts in lightweight mode by default.
 
 | Mode | Best For | Local Model Load | Command |
 | --- | --- | --- | --- |
@@ -93,7 +93,7 @@ Rewriting: disabled
 
 ### Polish Mode
 
-Use this when you want Yapr to clean up grammar and structure.
+Use this when you want JusYap to clean up grammar and structure.
 
 First install Ollama from:
 
@@ -117,7 +117,7 @@ When polishing is enabled, Ollama must be running.
 
 ## Launch Without Terminal
 
-If you do not want to run `./yapr` manually every time, install the app launcher:
+If you do not want to run `./jusyap` manually every time, install the app launcher:
 
 ```bash
 ./scripts/install-app.sh
@@ -126,10 +126,10 @@ If you do not want to run `./yapr` manually every time, install the app launcher
 Then open:
 
 ```text
-~/Applications/Yapr.app
+~/Applications/JusYap.app
 ```
 
-You can drag `Yapr.app` to the Dock.
+You can drag `JusYap.app` to the Dock.
 
 If macOS blocks the app from reading files in a protected folder like `Documents`, use the installed app from `~/Applications`.
 
@@ -151,12 +151,12 @@ Remove it later:
 Logs are written to:
 
 ```text
-~/Library/Logs/yapr/
+~/Library/Logs/jusyap/
 ```
 
 ## macOS Permissions
 
-Yapr needs a few macOS permissions.
+JusYap needs a few macOS permissions.
 
 | Permission | Why |
 | --- | --- |
@@ -178,10 +178,10 @@ Accessibility
 Input Monitoring
 ```
 
-Allow the app you use to launch Yapr:
+Allow the app you use to launch JusYap:
 
 - `Terminal`, `iTerm`, `Warp`, or `Visual Studio Code` if running from Terminal.
-- `Yapr` if launching `Yapr.app`.
+- `JusYap` if launching `JusYap.app`.
 
 After changing permissions, quit and reopen the app or terminal.
 
@@ -190,13 +190,13 @@ After changing permissions, quit and reopen the app or terminal.
 Record once, stop with Enter, and print output instead of pasting:
 
 ```bash
-./yapr --once --print-only
+./jusyap --once --print-only
 ```
 
-Check whether macOS is sending key events to Yapr:
+Check whether macOS is sending key events to JusYap:
 
 ```bash
-./yapr --debug-keys
+./jusyap --debug-keys
 ```
 
 Press a few keys. If nothing prints, check `Input Monitoring`.
@@ -206,7 +206,7 @@ Press a few keys. If nothing prints, check `Input Monitoring`.
 Edit:
 
 ```text
-~/.yapr/config.json
+~/.jusyap/config.json
 ```
 
 Common settings:
@@ -254,18 +254,18 @@ Smaller Whisper models are faster. Larger models are more accurate.
 Run:
 
 ```bash
-./yapr --debug-keys
+./jusyap --debug-keys
 ```
 
-If no key events appear, enable `Input Monitoring` for your terminal or `Yapr.app`.
+If no key events appear, enable `Input Monitoring` for your terminal or `JusYap.app`.
 
 ### Text Does Not Paste
 
-Enable `Accessibility` permission for your terminal or `Yapr.app`.
+Enable `Accessibility` permission for your terminal or `JusYap.app`.
 
 ### App Opens But Nothing Is Visible
 
-Yapr is a background app. It does not show a window. Click into a text field and press:
+JusYap is a background app. It does not show a window. Click into a text field and press:
 
 ```text
 Command + Shift + D
@@ -288,8 +288,8 @@ ollama pull llama3.2:1b
 
 ## Notes
 
-- Yapr uses clipboard paste because it works across most macOS apps.
+- JusYap uses clipboard paste because it works across most macOS apps.
 - The first transcription can take longer while Whisper downloads and caches the model.
 - The default setup is intentionally lightweight for MacBook Air-class machines.
 - Regenerate the app icon with `./scripts/generate-icon.py` if you edit the icon generator.
-- This project was previously named VoiceInk. It was renamed to Yapr to avoid confusion with another existing app.
+- This project was previously named VoiceInk and Yapr. It was renamed to JusYap to avoid confusion with existing tools.

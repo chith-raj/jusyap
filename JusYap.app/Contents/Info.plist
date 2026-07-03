@@ -6,17 +6,17 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleDisplayName</key>
-  <string>Yapr</string>
+  <string>JusYap</string>
   <key>CFBundleExecutable</key>
-  <string>Yapr</string>
+  <string>JusYap</string>
   <key>CFBundleIconFile</key>
-  <string>Yapr</string>
+  <string>JusYap</string>
   <key>CFBundleIdentifier</key>
-  <string>local.yapr</string>
+  <string>local.jusyap</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
-  <string>Yapr</string>
+  <string>JusYap</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>
@@ -28,6 +28,6 @@
   <key>LSUIElement</key>
   <true/>
   <key>NSMicrophoneUsageDescription</key>
-  <string>Yapr records your dictation locally so it can transcribe and insert text.</string>
+  <string>JusYap records your dictation locally so it can transcribe and insert text.</string>
 </dict>
 </plist>

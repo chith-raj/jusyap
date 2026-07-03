@@ -3,8 +3,8 @@ set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PLIST_DIR="$HOME/Library/LaunchAgents"
-PLIST_PATH="$PLIST_DIR/com.local.yapr.plist"
-LOG_DIR="$HOME/Library/Logs/yapr"
+PLIST_PATH="$PLIST_DIR/com.local.jusyap.plist"
+LOG_DIR="$HOME/Library/Logs/jusyap"
 
 mkdir -p "$PLIST_DIR" "$LOG_DIR"
 
@@ -15,10 +15,10 @@ cat > "$PLIST_PATH" <<PLIST
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.local.yapr</string>
+  <string>com.local.jusyap</string>
   <key>ProgramArguments</key>
   <array>
-    <string>${PROJECT_DIR}/yapr</string>
+    <string>${PROJECT_DIR}/jusyap</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
