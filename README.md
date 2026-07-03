@@ -1,5 +1,9 @@
 # JusYap
 
+<p align="center">
+  <img src="assets/jusyap-logo.png" alt="JusYap logo" width="360">
+</p>
+
 JusYap is a local macOS dictation tool for turning your free-form yapping into usable text. Press a shortcut, speak naturally, and JusYap inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
 
 ```text
