@@ -35,19 +35,31 @@ class DictationApp:
 
     def toggle_recording(self) -> None:
         if self.recorder.is_recording():
-            print("Stopping recording...", flush=True)
-            audio_path = self.recorder.stop_to_wav()
-            threading.Thread(
-                target=self._process_audio, args=(audio_path,), daemon=True
-            ).start()
+            self.stop_recording()
+            return
+
+        self.start_recording("Press the hotkey again to stop.")
+
+    def start_recording(self, stop_hint: str) -> None:
+        if self.recorder.is_recording():
             return
 
         if self._processing_lock.locked():
             print("Still processing the previous dictation.", flush=True)
             return
 
-        print("Recording. Press the hotkey again to stop.", flush=True)
+        print(f"Recording. {stop_hint}", flush=True)
         self.recorder.start()
+
+    def stop_recording(self) -> None:
+        if not self.recorder.is_recording():
+            return
+
+        print("Stopping recording...", flush=True)
+        audio_path = self.recorder.stop_to_wav()
+        threading.Thread(
+            target=self._process_audio, args=(audio_path,), daemon=True
+        ).start()
 
     def record_once_until_enter(self) -> None:
         print("Recording. Press Enter to stop.", flush=True)
@@ -104,6 +116,64 @@ def run_hotkey_daemon(app: DictationApp, hotkey: str) -> None:
 
     with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
         threading.Event().wait()
+
+
+def run_hold_key_daemon(app: DictationApp, hold_key: str) -> None:
+    parsed_keys = keyboard.HotKey.parse(hold_key)
+    if len(parsed_keys) != 1:
+        raise ValueError(f"Hold trigger must be a single key: {hold_key}")
+
+    target_key = parsed_keys[0]
+    pressed = False
+    press_lock = threading.Lock()
+
+    def matches_target(key):  # noqa: ANN001
+        if key == target_key:
+            return True
+        if target_key == keyboard.Key.alt:
+            return key == keyboard.Key.alt_r
+        return False
+
+    def on_press(key):  # noqa: ANN001
+        nonlocal pressed
+        canonical_key = listener.canonical(key)
+        if not matches_target(canonical_key):
+            return
+        with press_lock:
+            if pressed:
+                return
+            pressed = True
+        app.start_recording("Release Option to stop.")
+
+    def on_release(key):  # noqa: ANN001
+        nonlocal pressed
+        canonical_key = listener.canonical(key)
+        if not matches_target(canonical_key):
+            return
+        with press_lock:
+            if not pressed:
+                return
+            pressed = False
+        app.stop_recording()
+
+    print(f"Listening for hold key: {hold_key}", flush=True)
+    print("Hold Option to record. Release Option to stop.", flush=True)
+    print("Keep this terminal open, or install the LaunchAgent from scripts/.", flush=True)
+
+    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+        threading.Event().wait()
+
+
+def run_trigger_daemon(app: DictationApp, config: Dict[str, Any]) -> None:
+    trigger = config.get("trigger", {})
+    mode = trigger.get("mode", "hotkey")
+
+    if mode == "hold":
+        run_hold_key_daemon(app, trigger.get("key", "<alt>"))
+    elif mode == "hotkey":
+        run_hotkey_daemon(app, trigger.get("key", config["hotkey"]))
+    else:
+        raise ValueError(f"Unsupported trigger mode: {mode}")
 
 
 def debug_keys() -> None:
@@ -199,7 +269,7 @@ def main() -> int:
     if args.once:
         app.record_once_until_enter()
     else:
-        run_hotkey_daemon(app, config["hotkey"])
+        run_trigger_daemon(app, config)
     return 0
 
 

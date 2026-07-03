@@ -8,6 +8,10 @@ from typing import Any, Dict
 
 DEFAULT_CONFIG: Dict[str, Any] = {
     "hotkey": "<cmd>+<shift>+d",
+    "trigger": {
+        "mode": "hold",
+        "key": "<alt>",
+    },
     "recording": {
         "sample_rate": 16000,
         "channels": 1,

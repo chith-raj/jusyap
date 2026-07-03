@@ -4,15 +4,15 @@
   <img src="assets/jusyap-logo.png" alt="JusYap logo" width="360">
 </p>
 
-JusYap is a local macOS dictation tool for turning your free-form yapping into usable text. Press a shortcut, speak naturally, and JusYap inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
+JusYap is a local macOS dictation tool for turning your free-form yapping into usable text. Hold Option, speak naturally, and JusYap inserts the transcribed text into the active input field. You can keep it lightweight with local Whisper transcription only, or enable local Ollama rewriting for polished text.
 
 ```text
-Default shortcut: Command + Shift + D
+Default trigger: Hold Option to record, release Option to stop
 ```
 
 ## What It Does
 
-- Records your voice with a global hotkey.
+- Records your voice with a push-to-talk trigger.
 - Transcribes locally with `faster-whisper`.
 - Optionally rewrites locally with Ollama.
 - Pastes into the active browser form, editor, chat box, document, or note.
@@ -28,7 +28,7 @@ Follow this path if you are setting up JusYap for the first time:
 [ ] Run setup
 [ ] Start JusYap
 [ ] Approve macOS permissions
-[ ] Press Command + Shift + D inside any text field
+[ ] Hold Option inside any text field
 ```
 
 ### 1. Clone The Repo
@@ -60,15 +60,15 @@ This creates a Python virtual environment, installs dependencies, and creates:
 You should see:
 
 ```text
-Listening for hotkey: <cmd>+<shift>+d
+Listening for hold key: <alt>
 ```
 
 ### 4. Dictate
 
 1. Click any text field.
-2. Press `Command + Shift + D`.
+2. Hold `Option`.
 3. Speak.
-4. Press `Command + Shift + D` again.
+4. Release `Option`.
 5. JusYap transcribes and inserts the final text.
 
 ## Choose A Mode
@@ -166,7 +166,7 @@ JusYap needs a few macOS permissions.
 | --- | --- |
 | Microphone | Records dictation |
 | Accessibility | Pastes text into the active app |
-| Input Monitoring | Receives the global hotkey |
+| Input Monitoring | Receives the push-to-talk trigger |
 
 Open:
 
@@ -218,6 +218,10 @@ Common settings:
 ```json
 {
   "hotkey": "<cmd>+<shift>+d",
+  "trigger": {
+    "mode": "hold",
+    "key": "<alt>"
+  },
   "whisper": {
     "model": "tiny.en"
   },
@@ -232,12 +236,24 @@ Common settings:
 }
 ```
 
-Hotkey examples:
+Trigger examples:
 
-```text
-<cmd>+<shift>+d
-<ctrl>+<alt>+<space>
-<ctrl>+<shift>+f12
+```json
+{
+  "trigger": {
+    "mode": "hold",
+    "key": "<alt>"
+  }
+}
+```
+
+```json
+{
+  "trigger": {
+    "mode": "hotkey",
+    "key": "<cmd>+<shift>+d"
+  }
+}
 ```
 
 Whisper model examples:
@@ -253,7 +269,7 @@ Smaller Whisper models are faster. Larger models are more accurate.
 
 ## Troubleshooting
 
-### Hotkey Does Nothing
+### Option Hold Does Nothing
 
 Run:
 
@@ -261,7 +277,7 @@ Run:
 ./jusyap --debug-keys
 ```
 
-If no key events appear, enable `Input Monitoring` for your terminal or `JusYap.app`.
+If no key events appear when you press Option, enable `Input Monitoring` for your terminal or `JusYap.app`.
 
 ### Text Does Not Paste
 
@@ -272,7 +288,7 @@ Enable `Accessibility` permission for your terminal or `JusYap.app`.
 JusYap is a background app. It does not show a window. Click into a text field and press:
 
 ```text
-Command + Shift + D
+Hold Option
 ```
 
 ### Polishing Does Not Work
