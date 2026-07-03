@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 from typing import Any, Dict
 
 
@@ -20,8 +23,6 @@ class Rewriter:
         return self._rewrite_with_ollama(transcript)
 
     def _rewrite_with_ollama(self, transcript: str) -> str:
-        import requests
-
         style = self.config.get("style", "polished and concise")
         preserve_intent = self.config.get("preserve_intent", True)
         preserve_instruction = (
@@ -47,13 +48,23 @@ Dictated text:
                 "num_predict": 700,
             },
         }
-        response = requests.post(
+        request = Request(
             self.config["ollama_url"],
-            json=payload,
-            timeout=self.config.get("timeout_seconds", 90),
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
         )
-        response.raise_for_status()
-        data = response.json()
+        try:
+            with urlopen(
+                request, timeout=self.config.get("timeout_seconds", 90)
+            ) as response:
+                data = json.loads(response.read().decode("utf-8"))
+        except HTTPError as exc:
+            message = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(f"Ollama request failed: {exc.code} {message}") from exc
+        except URLError as exc:
+            raise RuntimeError(f"Could not connect to Ollama: {exc.reason}") from exc
+
         rewritten = data.get("response", "").strip()
         return strip_wrapping_quotes(rewritten) or transcript.strip()
 
