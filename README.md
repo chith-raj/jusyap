@@ -311,5 +311,5 @@ ollama pull llama3.2:1b
 - JusYap uses clipboard paste because it works across most macOS apps.
 - The first transcription can take longer while Whisper downloads and caches the model.
 - The default setup is intentionally lightweight for MacBook Air-class machines.
-- Regenerate the app icon with `./scripts/generate-icon.py` if you edit the icon generator.
+- Regenerate the app icon with `./scripts/generate-icon.py` after replacing `assets/jusyap-app-icon.png`.
 - This project was previously named VoiceInk and Yapr. It was renamed to JusYap to avoid confusion with existing tools.

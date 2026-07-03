@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
-LOGO_PATH = PROJECT_DIR / "assets" / "jusyap-logo.png"
+ICON_SOURCE_PATH = PROJECT_DIR / "assets" / "jusyap-app-icon.png"
 RESOURCES_DIR = PROJECT_DIR / "JusYap.app" / "Contents" / "Resources"
 ICONSET_DIR = RESOURCES_DIR / "JusYap.iconset"
 ICNS_PATH = RESOURCES_DIR / "JusYap.icns"
@@ -41,7 +41,7 @@ def resize_logo(size: int, out_path: Path) -> None:
             "-z",
             str(size),
             str(size),
-            str(LOGO_PATH),
+            str(ICON_SOURCE_PATH),
             "--out",
             str(out_path),
         ],
@@ -62,8 +62,8 @@ def write_icns(path: Path) -> None:
 
 
 def main() -> int:
-    if not LOGO_PATH.exists():
-        raise FileNotFoundError(f"Logo not found: {LOGO_PATH}")
+    if not ICON_SOURCE_PATH.exists():
+        raise FileNotFoundError(f"App icon source not found: {ICON_SOURCE_PATH}")
 
     RESOURCES_DIR.mkdir(parents=True, exist_ok=True)
     ICONSET_DIR.mkdir(parents=True, exist_ok=True)
